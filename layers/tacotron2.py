@@ -2,7 +2,7 @@ import torch
 from torch.autograd import Variable
 from torch import nn
 from torch.nn import functional as F
-from .common_layers import init_attn, Prenet, Linear
+from TTS.layers.common_layers import init_attn, Prenet, Linear
 
 
 class ConvBNBlock(nn.Module):
