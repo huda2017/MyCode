@@ -93,11 +93,15 @@ class Tacotron2(nn.Module):
 
         if self.bidirectional_decoder:
             decoder_outputs_backward, alignments_backward = self._backward_inference(mel_specs, encoder_outputs, mask)
-            return decoder_outputs, postnet_outputs, alignments, stop_tokens, decoder_outputs_backward, alignments_backward, mu, logvar, z
-        if ref_cond:
-            return decoder_outputs, postnet_outputs, alignments, stop_tokens, mu, logvar, z
+            if ref_con:
+                return decoder_outputs, postnet_outputs, alignments, stop_tokens, decoder_outputs_backward, alignments_backward, mu, logvar, z
+            else:
+                return decoder_outputs, postnet_outputs, alignments, stop_tokens, decoder_outputs_backward, alignments_backward                    
         else:
-            return decoder_outputs, postnet_outputs, alignments, stop_tokens
+            if ref_cond:
+                return decoder_outputs, postnet_outputs, alignments, stop_tokens, mu, logvar, z
+            else:
+                return decoder_outputs, postnet_outputs, alignments, stop_tokens
 
     def inference(self, text,style_mel, speaker_ids=None,ref_cond=True):
         embedded_inputs = self.embedding(text).transpose(1, 2)
