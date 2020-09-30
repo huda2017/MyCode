@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.modules.conv as conv
-from hparams import create_hparams
+from TTS.hparams import create_hparams
 
 hparams = create_hparams()
 
