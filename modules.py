@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.init as init
 import torch.nn.functional as F
 #from layers import LinearNorm
-from CoordConv import CoordConv2d
+from TTS.CoordConv import CoordConv2d
 
 
 
