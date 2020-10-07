@@ -283,11 +283,15 @@ def set_init_dict(model_dict, checkpoint, c):
     return model_dict
 
 
+
 def setup_model(num_chars, num_speakers, c):
     print(" > Using model: {}".format(c.model))
-    MyModel = importlib.import_module('TTS.models.' + c.model.lower())
-    #MyModel = importlib.import_module('models.' + c.model.lower())
+    #MyModel = importlib.import_module('TTS.models.' + c.model.lower())
+    #MyModel = importlib.import_module('TTS.models.' + c.model.lower())
+    MyModel = importlib.import_module('TTS.models.tacotron2')
+    print(MyModel)
     MyModel = getattr(MyModel, c.model)
+    #print(MyModel.AttrDict())
     if c.model.lower() in "tacotron":
         model = MyModel(num_chars=num_chars,
                         num_speakers=num_speakers,
@@ -326,9 +330,11 @@ def setup_model(num_chars, num_speakers, c):
                         attn_K=c.attention_heads,
                         separate_stopnet=c.separate_stopnet,
                         bidirectional_decoder=c.bidirectional_decoder,
+                        stop_token=c.stop_token,
                         VAE_params=c.VAE)
 
     return model
+
 
 
 def split_dataset(items):
