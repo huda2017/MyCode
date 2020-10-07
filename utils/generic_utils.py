@@ -330,7 +330,7 @@ def setup_model(num_chars, num_speakers, c):
                         attn_K=c.attention_heads,
                         separate_stopnet=c.separate_stopnet,
                         bidirectional_decoder=c.bidirectional_decoder,
-                        stop_token=c.stop_token,
+                        stop_token=c.audio['stop_token'],
                         VAE_params=c.VAE)
 
     return model
