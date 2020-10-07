@@ -27,11 +27,13 @@ class Tacotron2(nn.Module):
                  attn_K=5,
                  separate_stopnet=True,
                  bidirectional_decoder=False,
+                 stop_token=0.7,
                  VAE_params=None ,):
         super(Tacotron2, self).__init__()
 
         self.VAE_params = VAE_params
-
+        self.stop_token=stop_token
+        
         self.postnet_output_dim = postnet_output_dim
         self.decoder_output_dim = decoder_output_dim
         self.n_frames_per_step = r
@@ -53,7 +55,7 @@ class Tacotron2(nn.Module):
         self.decoder = Decoder(decoder_dim, self.decoder_output_dim, r, attn_type, attn_win,
                                attn_norm, prenet_type, prenet_dropout,
                                forward_attn, trans_agent, forward_attn_mask,
-                               location_attn, attn_K, separate_stopnet, proj_speaker_dim)
+                               location_attn, attn_K, separate_stopnet, proj_speaker_dim,self.stop_token)
         if self.bidirectional_decoder:
             self.decoder_backward = copy.deepcopy(self.decoder)
         self.postnet = Postnet(self.postnet_output_dim)
