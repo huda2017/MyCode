@@ -101,7 +101,7 @@ class Decoder(nn.Module):
     def __init__(self, in_features, memory_dim, r, attn_type, attn_win, attn_norm,
                  prenet_type, prenet_dropout, forward_attn, trans_agent,
                  forward_attn_mask, location_attn, attn_K, separate_stopnet,
-                 speaker_embedding_dim):
+                 speaker_embedding_dim,stop_token):
         super(Decoder, self).__init__()
         self.memory_dim = memory_dim
         self.r_init = r
@@ -115,6 +115,7 @@ class Decoder(nn.Module):
         self.gate_threshold = 0.5
         self.p_attention_dropout = 0.1
         self.p_decoder_dropout = 0.1
+        self.stop_token=stop_token
 
         # memory -> |Prenet| -> processed_memory
         prenet_dim = self.memory_dim
@@ -290,7 +291,7 @@ class Decoder(nn.Module):
             stop_tokens += [stop_token]
             alignments += [alignment]
 
-            if stop_token > 0.7:
+            if stop_token > self.stop_token:  #0.7:
                 break
             if len(outputs) == self.max_decoder_steps:
                 print("   | > Decoder stopped with 'max_decoder_steps")
