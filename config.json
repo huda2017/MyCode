@@ -12,6 +12,7 @@
         "hop_length": 256,       // stft window hop-lengh in ms.
         "frame_length_ms": null, // stft window length in ms.If null, 'win_length' is used.
         "frame_shift_ms": null,  // stft window hop-lengh in ms. If null, 'hop_length' is used.
+        "stop_token": 0.9,
 
         // Audio processing parameters
         "sample_rate": 22050,   // DATASET-RELATED: wav sample-rate. If different than the original data, it is resampled.
