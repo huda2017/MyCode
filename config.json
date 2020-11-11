@@ -51,7 +51,7 @@
         "ref_enc_pad": [1, 1],
         "ref_enc_gru_size": 256,
         "z_latent_dim": 32,
-        "anneal_function": "logistic",
+        "anneal_function": "constant",
         "anneal_k": 0.0025,
         "anneal_x0": 10000,
         "anneal_upper": 0.2,
